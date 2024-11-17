@@ -1,9 +1,122 @@
+// sketch.js
+
+const shapeCounts = JSON.parse(localStorage.getItem("shapeCounts"));
+if (!shapeCounts) {
+  window.location.href = "index.html";
+}
+const { triangles, circles, rectangles } = shapeCounts;
+console.log(`Dreiecke: ${triangles}, Kreise: ${circles}, Rechtecke: ${rectangles}`);
+
+const canvasWidth = 768;
+const canvasHeight = 1080;
+const num = 10;
+
 function setup() {
-  createCanvas(400, 500);
+
+  //let canvas = createCanvas(canvasWidth, canvasHeight);
+  //canvas.parent('artworkContainer'); // Hier wird der Canvas in den Container eingefügt
+  //Zeichne Leinwand
+  createCanvas(canvasWidth, canvasHeight); 
+  background(255);
+
+  let rectWidth = canvasWidth * 0.6;
+  let rectHeight = canvasHeight * 0.5;
+  let rectX = (canvasWidth - rectWidth) / 2;
+  let rectY = canvasHeight * 0.1;
+  
+  noFill();
+  stroke(0);
+  rect(rectX, rectY, rectWidth, rectHeight);
+
+  // Sortiere nach 'count' und nimm die obersten 10 Hashtags
+  let topHashtags = hashtagData
+    .sort((a, b) => b.count - a.count)
+    .slice(0, num);
+
+  let totalTopCount = topHashtags.reduce((sum, hashtag) => sum + hashtag.count, 0);
+
+  // Farben erstellen für jeden Hashtag, jetzt noch random
+  //let colors = [];
+  //for (let i = 0; i < num; i++) {
+    //colors.push(color(random(100, 255), random(100, 255), random(100, 255)));
+  //}
+  let colors = [
+    "#1E90FF",  // Blau
+    "#FF4500",  // Rot-Orange
+    "#FFD700",  // Gelb
+    "#32CD32",  // Grün
+    "#8A2BE2",  // Lila
+    "#40E0D0",  // Türkis
+    "#FF6347",  // Tomatenrot
+    "#FF1493",  // Dunkles Pink
+    "#4682B4",  // Stahlblau
+    "#9370DB"   // Violett
+];
+
+  // Zeichne die Legende unter dem Rechteck
+  let legendX1 = rectX; // Linker Block
+  let legendX2 = rectX + rectWidth / 2 + 20; // Rechter Block
+  let legendY = rectY + rectHeight + 50; // Höhe unter dem Rechteck
+
+  textSize(16);
+  textAlign(LEFT, CENTER);
+  
+  // Zeichne die ersten 5 Hashtags im linken Block
+  for (let index = 0; index < 5; index++) {
+      fill(colors[index]);
+      noStroke();
+      rect(legendX1, legendY + index * 30, 20, 20); // Farbkasten
+
+      fill(0);
+      text(topHashtags[index].hashtag, legendX1 + 30, legendY + index * 30 + 10); // Hashtag-Text
+  }
+
+  // Zeichne die nächsten 5 Hashtags im rechten Block
+  for (let index = 5; index < 10; index++) {
+      fill(colors[index]);
+      noStroke();
+      rect(legendX2, legendY + (index - 5) * 30, 20, 20); // Farbkasten
+
+      fill(0);
+      text(topHashtags[index].hashtag, legendX2 + 30, legendY + (index - 5) * 30 + 10); // Hashtag-Text
+  }
+
+  ///////////////////////////////////////////////////
+  //TEST Fibonacci Raster
+  let goldenRatio = 0.618;
+  // Berechne die Hauptachsen des Fibonacci-Rasters
+  let x1 = rectX + rectWidth * goldenRatio;       // Vertikale Linie 1
+  let x2 = rectX + rectWidth * (1 - goldenRatio); // Vertikale Linie 2
+  let y1 = rectY + rectHeight * goldenRatio;      // Horizontale Linie 1
+  let y2 = rectY + rectHeight * (1 - goldenRatio);// Horizontale Linie 2
+
+   // Vertikale Linie 1 (blau)
+  stroke(0, 0, 255); // Blau
+  line(x1, rectY, x1, rectY + rectHeight);
+
+// Vertikale Linie 2 (rot)
+  stroke(255, 0, 0); // Rot
+  line(x2, rectY, x2, rectY + rectHeight);
+
+// Horizontale Linie 1 (lila)
+  stroke(128, 0, 128); // Lila
+  line(rectX, y1, rectX + rectWidth, y1);
+
+// Horizontale Linie 2 (grün)
+  stroke(0, 255, 0); // Grün
+  line(rectX, y2, rectX + rectWidth, y2);
+  ////////////////////////////////////////////////////////////////
+
+  // Funktion aufrufen
+  let shapes = predictShape(num, triangles, circles, rectangles);
+  let surfaceAreas = calculateSurfaceArea(rectWidth, rectHeight, topHashtags,  totalTopCount);
+  //drawPoints(rectX, rectY, rectWidth, rectHeight);
+  console.log(`ShapeArray Kreis: ${shapes}`);
+  drawCircleForHashtag(rectX, rectY, rectWidth, rectHeight, colors, surfaceAreas, shapes);
+  console.log(`ShapeArray Dreieck: ${shapes}`);
+  drawTrianglesForHashtag(rectX, rectY, rectWidth, rectHeight, colors, surfaceAreas, shapes);
+  drawRectanglesForHashtag(rectX, rectY, rectWidth, rectHeight, colors, surfaceAreas, shapes);
+   
 }
 
-function draw() {
-  background(300, 300, 200);
-
-  rect(100, 50, 40, 50);
-}
+//FUNKTIONEN
