@@ -69,12 +69,10 @@ function drawRectanglesForHashtag(rectX, rectY, rectWidth, rectHeight, colors, s
                 drawRectangleLeft(deltaHorizontal, rectX, rectY, rectWidth, rectHeight, pointTopRed, pointBottomRed, area, color);
             }
             
-
             
         }
     
     }
-
 
 }
 
