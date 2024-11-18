@@ -1,49 +1,59 @@
-// Coding Train / Daniel Shiffman
-// Weighted Voronoi Stippling
-// https://thecodingtrain.com/challenges/181-image-stippling
-
 let seedPoints = [];
-
 let delaunay;
+
+//const num = 10; // Anzahl der Top-Hashtags, die betrachtet werden sollen
+let topHashtags = hashtagData
+  .sort((a, b) => b.count - a.count)
+  //.slice(0, num); // Wähle die Top `num` Hashtags
+let maxCount = Math.max(...topHashtags.map(hashtag => hashtag.count));
+// Die Anzahl der Punkte entspricht der Anzahl der Top-Hashtags
+console.log("topHashtags.length:", topHashtags.length);
+
 
 function setup() {
   createCanvas(400, 400);
-  for (let i = 0; i < 100; i++) {
+
+  for (let i = 0; i < topHashtags.length; i++) {
     seedPoints[i] = createVector(random(width), random(height));
   }
+
+  // Berechne die Delaunay-Triangulation
   delaunay = calculateDelaunay(seedPoints);
+  noLoop();
 }
 
 function draw() {
   background(255);
 
-  for (let v of seedPoints) {
-    stroke(0);
-    strokeWeight(4);
-    point(v.x, v.y);
+  // Definiere die Farbpalette
+  const colorPalette = ['#003B46', '#07575B', '#66A5AD', '#C4DFE6'];
+
+  let voronoi = delaunay.voronoi([0, 0, width, height]);
+  let polygons = voronoi.cellPolygons();
+  for (let poly of polygons){
+    console.log(poly);
+    beginShape();
+    for (let i = 0; i < poly.length; i++){
+      // Wähle eine zufällige Farbe aus der Palette
+      let randomColor = colorPalette[int(random(colorPalette.length))];
+      stroke(0);
+      strokeWeight(2);
+      vertex(poly[i][0], poly[i][1]);
+      fill(randomColor);
+    }
+    endShape();
+    
   }
 
-  noFill();
-  strokeWeight(1);
-  console.log(delaunay.triangles);
-  let { points, triangles } = delaunay;
-  for (let i = 0; i < triangles.length; i += 3) {
-    let a = 2 * delaunay.triangles[i];
-    let b = 2 * delaunay.triangles[i + 1];
-    let c = 2 * delaunay.triangles[i + 2];
-    triangle(
-      points[a],
-      points[a + 1],
-      points[b],
-      points[b + 1],
-      points[c],
-      points[c + 1]
-    );
-  }
+  //noLoop();
+
 }
+
 
 function calculateDelaunay(points) {
   let pointsArray = [];
+  
+ 
   for (let v of points) {
     pointsArray.push(v.x, v.y);
   }

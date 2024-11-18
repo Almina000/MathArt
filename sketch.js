@@ -9,6 +9,9 @@ console.log(`Dreiecke: ${triangles}, Kreise: ${circles}, Rechtecke: ${rectangles
 
 const canvasWidth = 768;
 const canvasHeight = 1080;
+
+const number = triangles + circles + rectangles;
+console.log(`gesamt: ${number}`);
 const num = 10;
 
 function setup() {
@@ -60,26 +63,30 @@ function setup() {
 
   textSize(16);
   textAlign(LEFT, CENTER);
+
+  let leftCount = Math.ceil(number / 2); // Anzahl der Hashtags links
+  let rightCount = Math.floor(number / 2); // Anzahl der Hashtags rechts
   
   // Zeichne die ersten 5 Hashtags im linken Block
-  for (let index = 0; index < 5; index++) {
-      fill(colors[index]);
-      noStroke();
-      rect(legendX1, legendY + index * 30, 20, 20); // Farbkasten
+  for (let index = 0; index < leftCount; index++) {
+    fill(colors[index]);
+    noStroke();
+    rect(legendX1, legendY + index * 30, 20, 20);
 
-      fill(0);
-      text(topHashtags[index].hashtag, legendX1 + 30, legendY + index * 30 + 10); // Hashtag-Text
-  }
+    fill(0);
+    text(topHashtags[index].hashtag, legendX1 + 30, legendY + index * 30 + 10);
+}
 
-  // Zeichne die nächsten 5 Hashtags im rechten Block
-  for (let index = 5; index < 10; index++) {
-      fill(colors[index]);
-      noStroke();
-      rect(legendX2, legendY + (index - 5) * 30, 20, 20); // Farbkasten
+// Rechter Block
+for (let index = 0; index < rightCount; index++) {
+    let hashtagIndex = leftCount + index; // Index im gesamten Array
+    fill(colors[hashtagIndex]);
+    noStroke();
+    rect(legendX2, legendY + index * 30, 20, 20);
 
-      fill(0);
-      text(topHashtags[index].hashtag, legendX2 + 30, legendY + (index - 5) * 30 + 10); // Hashtag-Text
-  }
+    fill(0);
+    text(topHashtags[hashtagIndex].hashtag, legendX2 + 30, legendY + index * 30 + 10);
+}
 
   ///////////////////////////////////////////////////
   //TEST Fibonacci Raster
