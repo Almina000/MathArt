@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geometrie-Tools</title>
-    <link rel="stylesheet" href="styleIndex.css">
+    <link rel="stylesheet" href="styleStart.css">
 </head>
 <body>
-    <div class="container">
+        <div class="circles">
+            <a href="start.html" class="circle">1</a>
+            <div class="circle big">2</div> <!-- Kleine Kreise sind nicht anklickbar -->
+            <div class="circle grey">3</div>
+            <div class="circle grey">4</div>
+            <div class="circle grey">5</div>
+        </div>
         <h1>Geometrie-Tools</h1>
-        <button onclick="window.location.href='delaunay.html?mode=random'">Random</button>
-        <button onclick="window.location.href='delaunay.html?mode=häufigkeit'">Häufigkeit</button>
-    </div>
+        <div class="buttons">
+            <button onclick="window.location.href='delaunay.html?mode=random'">Random</button>
+            <button onclick="window.location.href='delaunay.html?mode=häufigkeit'">Häufigkeit</button>
+        </div>
 </body>
 </html>

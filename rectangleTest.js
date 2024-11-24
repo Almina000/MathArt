@@ -24,29 +24,29 @@ function drawRectanglesForHashtag(rectX, rectY, rectWidth, rectHeight, colors, s
     const pointRightGreen = { x: rectX + rectWidth, y: greenLine };
     
     // Einfärben der Schnittpunkte als Ellipsen
-    fill(0, 0, 255); // Blau für den oberen Punkt der blauen Linie
-    ellipse(pointTopBlue.x, pointTopBlue.y, 30, 30); // Punkt oben (Blaue Linie)
+    // fill(0, 0, 255); // Blau für den oberen Punkt der blauen Linie
+    // ellipse(pointTopBlue.x, pointTopBlue.y, 30, 30); // Punkt oben (Blaue Linie)
 
-    fill(0, 0, 255); // Blau für den unteren Punkt der blauen Linie
-    ellipse(pointBottomBlue.x, pointBottomBlue.y, 30, 30); // Punkt unten (Blaue Linie)
+    // fill(0, 0, 255); // Blau für den unteren Punkt der blauen Linie
+    // ellipse(pointBottomBlue.x, pointBottomBlue.y, 30, 30); // Punkt unten (Blaue Linie)
 
-    fill(255, 0, 0); // Rot für den oberen Punkt der roten Linie
-    ellipse(pointTopRed.x, pointTopRed.y, 30, 30); // Punkt oben (Rote Linie)
+    // fill(255, 0, 0); // Rot für den oberen Punkt der roten Linie
+    // ellipse(pointTopRed.x, pointTopRed.y, 30, 30); // Punkt oben (Rote Linie)
 
-    fill(255, 0, 0); // Rot für den unteren Punkt der roten Linie
-    ellipse(pointBottomRed.x, pointBottomRed.y, 30, 30); // Punkt unten (Rote Linie)
+    // fill(255, 0, 0); // Rot für den unteren Punkt der roten Linie
+    // ellipse(pointBottomRed.x, pointBottomRed.y, 30, 30); // Punkt unten (Rote Linie)
 
-    fill(138, 43, 226); // Lila für den linken Punkt der lila Linie
-    ellipse(pointLeftLila.x, pointLeftLila.y, 30, 30); // Punkt links (Lila Linie)
+    // fill(138, 43, 226); // Lila für den linken Punkt der lila Linie
+    // ellipse(pointLeftLila.x, pointLeftLila.y, 30, 30); // Punkt links (Lila Linie)
 
-    fill(138, 43, 226); // Lila für den rechten Punkt der lila Linie
-    ellipse(pointRightLila.x, pointRightLila.y, 30, 30); // Punkt rechts (Lila Linie)
+    // fill(138, 43, 226); // Lila für den rechten Punkt der lila Linie
+    // ellipse(pointRightLila.x, pointRightLila.y, 30, 30); // Punkt rechts (Lila Linie)
 
-    fill(0, 255, 0); // Grün für den linken Punkt der grünen Linie
-    ellipse(pointLeftGreen.x, pointLeftGreen.y, 30, 30); // Punkt links (Grüne Linie)
+    // fill(0, 255, 0); // Grün für den linken Punkt der grünen Linie
+    // ellipse(pointLeftGreen.x, pointLeftGreen.y, 30, 30); // Punkt links (Grüne Linie)
 
-    fill(0, 255, 0); // Grün für den rechten Punkt der grünen Linie
-    ellipse(pointRightGreen.x, pointRightGreen.y, 30, 30); // Punkt rechts (Grüne Linie)
+    // fill(0, 255, 0); // Grün für den rechten Punkt der grünen Linie
+    // ellipse(pointRightGreen.x, pointRightGreen.y, 30, 30); // Punkt rechts (Grüne Linie)
 
     let deltaHorizontal = rectWidth * 0.15; // 10% der Breite für horizontale Linien
     let deltaVertical = rectHeight * 0.15;   // 10% der Höhe für vertikale Linien

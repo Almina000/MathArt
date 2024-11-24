@@ -14,10 +14,12 @@ const number = triangles + circles + rectangles;
 console.log(`gesamt: ${number}`);
 const num = 10;
 
+function preload() {
+  customFont = loadFont('assets/fonts/AbadiMT-ExtraLight.ttf');
+}
+
 function setup() {
 
-  //let canvas = createCanvas(canvasWidth, canvasHeight);
-  //canvas.parent('artworkContainer'); // Hier wird der Canvas in den Container eingefügt
   //Zeichne Leinwand
   createCanvas(canvasWidth, canvasHeight); 
   background(255);
@@ -61,6 +63,7 @@ function setup() {
   let legendX2 = rectX + rectWidth / 2 + 20; // Rechter Block
   let legendY = rectY + rectHeight + 50; // Höhe unter dem Rechteck
 
+  textFont(customFont);
   textSize(16);
   textAlign(LEFT, CENTER);
 
@@ -71,7 +74,8 @@ function setup() {
   for (let index = 0; index < leftCount; index++) {
     fill(colors[index]);
     noStroke();
-    rect(legendX1, legendY + index * 30, 20, 20);
+    //rect(legendX1, legendY + index * 30, 20, 20);
+    ellipse(legendX1 + 10, legendY + index * 30 + 10, 20, 20); // Kreise statt Rechtecke
 
     fill(0);
     text(topHashtags[index].hashtag, legendX1 + 30, legendY + index * 30 + 10);
@@ -82,7 +86,9 @@ for (let index = 0; index < rightCount; index++) {
     let hashtagIndex = leftCount + index; // Index im gesamten Array
     fill(colors[hashtagIndex]);
     noStroke();
-    rect(legendX2, legendY + index * 30, 20, 20);
+    //rect(legendX2, legendY + index * 30, 20, 20);
+    ellipse(legendX2 + 10, legendY + index * 30 + 10, 20, 20); // Kreise statt Rechtecke
+
 
     fill(0);
     text(topHashtags[hashtagIndex].hashtag, legendX2 + 30, legendY + index * 30 + 10);
@@ -98,20 +104,20 @@ for (let index = 0; index < rightCount; index++) {
   let y2 = rectY + rectHeight * (1 - goldenRatio);// Horizontale Linie 2
 
    // Vertikale Linie 1 (blau)
-  stroke(0, 0, 255); // Blau
-  line(x1, rectY, x1, rectY + rectHeight);
+ // stroke(0, 0, 255); // Blau
+  //line(x1, rectY, x1, rectY + rectHeight);
 
 // Vertikale Linie 2 (rot)
-  stroke(255, 0, 0); // Rot
-  line(x2, rectY, x2, rectY + rectHeight);
+  //stroke(255, 0, 0); // Rot
+  //line(x2, rectY, x2, rectY + rectHeight);
 
 // Horizontale Linie 1 (lila)
-  stroke(128, 0, 128); // Lila
-  line(rectX, y1, rectX + rectWidth, y1);
+  //stroke(128, 0, 128); // Lila
+  //line(rectX, y1, rectX + rectWidth, y1);
 
 // Horizontale Linie 2 (grün)
-  stroke(0, 255, 0); // Grün
-  line(rectX, y2, rectX + rectWidth, y2);
+  //stroke(0, 255, 0); // Grün
+  //line(rectX, y2, rectX + rectWidth, y2);
   ////////////////////////////////////////////////////////////////
 
   // Funktion aufrufen

@@ -134,7 +134,7 @@ function drawRandomTriangle(rectX, rectY, rectWidth, rectHeight, surfaceArea, co
     } while (abs(area - surfaceArea) > 1); // Schleife, bis die Fläche nahe genug ist
   
     // Zeichne das Dreieck
-    fill(color); // Halbdurchsichtiges Lila
+    fill(color); 
     noStroke();
     triangle(x1, y1, x2, y2, x3, y3);
   }
